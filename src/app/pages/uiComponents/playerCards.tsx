@@ -43,7 +43,7 @@ export default function PlayerCards({isPopupVisible, setIsPopupVisible, setChose
             window.removeEventListener("keydown", handleKeyDown);
           };
         };
-      }, [gameStarted, chosenCardIndexes, selectedCardIndex, isPopupVisible]);
+      }, [gameStarted, chosenCardIndexes, selectedCardIndex, isPopupVisible, currentPlayer, setChosenCardIndexes, setIsPopupVisible]);
 
       const handleCardClick = (index: number) => {
         setChosenCardIndexes((prevIndexes) => {

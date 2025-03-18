@@ -13,7 +13,12 @@ export default function GameBoardCenter({ count, claim, total, askForDiscard, on
         const handleKeyDown = (event: KeyboardEvent) => {
           event.preventDefault()
           if (event.key === "Enter") {
-            askForDiscard ? onDiscard : onContinue
+            if (askForDiscard) {
+              onDiscard();
+            }
+            else {
+              onContinue();
+            }
           }
         };
       
