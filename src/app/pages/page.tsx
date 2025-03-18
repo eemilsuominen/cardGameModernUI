@@ -35,7 +35,7 @@ export default function GamePage() {
   const [callLie, setCallLie] = useState(false);
   const [lieCaller, setLieCaller] = useState("");
   const [cardPicker, setCardPicker] = useState("");
-  const [lastClaim, setLastClaim] = useState<any>(null);
+  const [lastClaim, setLastClaim] = useState(false);
 
   const [gameOver, setGameOver] = useState(false)
   const [gameWinner, setGameWinner] = useState("");
@@ -112,7 +112,7 @@ export default function GamePage() {
     setCallLie(true)
     setLieCaller(players[caller])
     
-    if (lastClaim[1]) {
+    if (lastClaim) {
       setCardPicker(players[caller])
     }
     else {
@@ -200,7 +200,7 @@ export default function GamePage() {
       lieCalled={callLie}
       lieCaller={lieCaller}
       cardPicker={cardPicker}
-      trueClaim={lastClaim[1]}
+      trueClaim={lastClaim}
       winner={gameWinner}
       gameOver={gameOver}
       />}

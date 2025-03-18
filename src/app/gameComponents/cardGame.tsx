@@ -66,7 +66,7 @@ export default class cardGame {
             players: this.getPlayers(),
             currentPlayer:  this.getCurrentPlayer(),
             playedCards: this.playedCards.length,
-            lastClaim: this.lastClaim,
+            lastClaim: this.lastClaim[1],
             deckSize: this.deck.size,
             turn: this.currentPlayer,
             deck: this.deck,
