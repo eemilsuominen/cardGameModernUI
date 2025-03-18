@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/router'
 import Player from "../gameComponents/player";
 import cardGame from "../gameComponents/cardGame";
 
@@ -9,14 +10,13 @@ import GamePlayers from "./uiComponents/gamePlayers";
 
 
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
 import PlayerCards from "./uiComponents/playerCards";
 
 export default function GamePage() {
 
-  const location = useLocation();
-  const names: string[] = location.state?.names || [];
-  const players: string[] = names.filter(name => name !== "");
+  const router = useRouter();
+  const { names } = router.query
+  const players = names ? (names as string).split(','): [];
 
   const [claimedRank, setClaimedRank] = useState<string>("");
   const [chosenCardIndexes, setChosenCardIndexes] = useState<number[]>([]);

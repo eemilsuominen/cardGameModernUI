@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import GamePage from "./pages/page";
-function Home() {
+import { useRouter } from 'next/router'
 
-  
+export default function Home() {
+
+  const router = useRouter();
   const [usernames, setUsernames] = useState(['', '', '', '']);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -12,6 +12,13 @@ function Home() {
     newUsernames[index] = e.target.value; // Update the value of the specific input
     setUsernames(newUsernames); // Set the new array of inputs
   };
+
+  const handleCreateGame = () => {
+    router.push({
+      pathname: "/game",
+      query: { names: usernames.filter((name) => name !== '').join(',') },
+    })
+  }
 
   return (
    
@@ -33,27 +40,13 @@ function Home() {
             onChange={(e) => handleInputChange(e, index)}
           />
         ))}
-          <Link 
-          to={"/game"}
-          state={{names: usernames}}
+          <button 
+          onClick={handleCreateGame}
           className={`rounded-full border border-solid border-blue-500 text-white px-4 py-2 text-center ${usernames.filter(username => username !== "").length >= 2 ? 'hover:bg-blue-600' : 'opacity-to pointer-events-none'}`}>
           Create Game
-          </Link>
+          </button>
         </div>
       </div>
     </div>
   );
-}
-
-export default function App() {
-  return(
-    <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="game" element={<GamePage />}/>
-        </Routes>
-      </Router>
-    </div>
-  )
 }
