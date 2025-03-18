@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 import Image from "next/image"
 import Player from '@/app/gameComponents/player';
-import Card from '@/app/gameComponents/card';
 
 export default function PlayerCards({isPopupVisible, setIsPopupVisible, setChosenCardIndexes, chosenCardIndexes, currentPlayer, gameStarted}: {  
     isPopupVisible: boolean;

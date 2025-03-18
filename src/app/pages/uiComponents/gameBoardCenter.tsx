@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {Link} from "react-router-dom"
 
 export default function GameBoardCenter({ count, claim, total, askForDiscard, onDiscard, onContinue, isTurn, nextPlayer, lieCalled, lieCaller, cardPicker, trueClaim, winner, gameOver }: 
@@ -22,7 +22,7 @@ export default function GameBoardCenter({ count, claim, total, askForDiscard, on
           window.removeEventListener("keydown", handleKeyDown);
         };
       };
-    }, [askForDiscard, onDiscard, onContinue]);
+    }, [askForDiscard, onDiscard, onContinue, isTurn]);
   
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-4">
