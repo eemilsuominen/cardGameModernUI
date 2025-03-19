@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import {Link} from "react-router-dom"
 
-export default function GameBoardCenter({ count, claim, total, askForDiscard, onDiscard, onContinue, isTurn, nextPlayer, lieCalled, lieCaller, cardPicker, trueClaim, winner, gameOver }: 
-  { count: number, claim: string, total: number, askForDiscard: boolean, onDiscard: () => void, onContinue: () => void, isTurn: boolean, nextPlayer: string, lieCalled: boolean, lieCaller: string, cardPicker: string, trueClaim: boolean, winner: string, gameOver: boolean }) {
+export default function GameBoardCenter({ count, claim, total, askForDiscard, onDiscard, onContinue, isTurn, nextPlayer, lieCalled, lieCaller, cardPicker, trueClaim, winner, gameOver, onEnd }: 
+  { count: number, claim: string, total: number, askForDiscard: boolean, onDiscard: () => void, onContinue: () => void, isTurn: boolean, nextPlayer: string, lieCalled: boolean, lieCaller: string, cardPicker: string, trueClaim: boolean, winner: string, gameOver: boolean, onEnd: () => void }) {
   const cardBackSrc = "/cards/nicubunu_Card_backs_grid_red.svg";
   const cardNames: {[key: string]: string} = {"A": "Ace", "J": "Jack", "Q": "Queen", "K": "King"}
   const displayName = cardNames[claim] || claim;
@@ -60,11 +59,11 @@ export default function GameBoardCenter({ count, claim, total, askForDiscard, on
         {gameOver && (
           <div className="flex flex-col">
             <span className="text-white text-xl font-bold mb-2">{winner} wins!</span>
-            <Link 
-            to={"/"}
+            <button 
+            onClick={onEnd}
             className={`rounded-full border border-solid border-blue-500 text-white px-4 py-2 text-center hover:bg-blue-600'`}>
             Back to front page
-            </Link>
+            </button>
           </div>
         )}
       </div>

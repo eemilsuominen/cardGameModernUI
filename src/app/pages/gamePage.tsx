@@ -1,5 +1,4 @@
 "use client"
-import { useRouter } from 'next/router'
 import Player from "../gameComponents/player";
 import cardGame from "../gameComponents/cardGame";
 
@@ -8,15 +7,12 @@ import ClaimPopUp from "./uiComponents/claimPopUp";
 import PickupDeck from "./uiComponents/pickupDeck";
 import GamePlayers from "./uiComponents/gamePlayers";
 
-
 import { useState, useEffect } from 'react';
 import PlayerCards from "./uiComponents/playerCards";
 
-export default function GamePage() {
+export default function GamePage({usernames, setCreateLobby}: {usernames: string[], setCreateLobby:() => void}) {
 
-  const router = useRouter();
-  const { names } = router.query
-  const players = names ? (names as string).split(','): [];
+  const players = usernames.filter(player => player !== "");
 
   const [claimedRank, setClaimedRank] = useState<string>("");
   const [chosenCardIndexes, setChosenCardIndexes] = useState<number[]>([]);
@@ -203,6 +199,7 @@ export default function GamePage() {
       trueClaim={lastClaim}
       winner={gameWinner}
       gameOver={gameOver}
+      onEnd={setCreateLobby}
       />}
 
       {/*Pop up for choosing the "claimed" card */}
