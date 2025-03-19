@@ -1,8 +1,35 @@
 import Image from "next/image"
 
+import { useEffect } from "react";
 export default function GamePlayers({players, currentPlayerIndex, gameStarted, askForDiscard, allPlayers, totalPlayed, handleCallLie, isTurn}: 
     {players: string[], currentPlayerIndex: number, gameStarted: boolean, askForDiscard: boolean, allPlayers: {name: string, count: number}[], totalPlayed: number, handleCallLie: (index: number) => void, isTurn: boolean}) {
     const cardBackSrc = "/cards/nicubunu_Card_backs_grid_red.svg";
+
+    //call lie with keyboard
+    useEffect(() => {
+        if (totalPlayed > 0) {
+            const handleKeyDown = (event: KeyboardEvent) => {
+            event.preventDefault()
+                if (!isTurn) {
+                    players.forEach((player, index) => {
+                        if (event.key === (index + 1).toString()) {
+                            handleCallLie(index);
+                        }
+                    })
+                }
+                else if (isTurn) {
+                    if (event.key === "l") {
+                        handleCallLie(currentPlayerIndex);
+                    }
+                }
+            };
+        
+            window.addEventListener("keydown", handleKeyDown);
+            return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            };
+        };
+        }, [isTurn, totalPlayed, handleCallLie, currentPlayerIndex, players]);
 
     return (
         <div className="flex justify-around items-center mt-20">
@@ -27,11 +54,9 @@ export default function GamePlayers({players, currentPlayerIndex, gameStarted, a
                     className="rounded-full border border-solid border-blue-500 text-white px-4 py-2 text-center" 
                     onClick={() => handleCallLie(index)}
                 >
-                    Call Lie
+                    {isTurn ? "Call Lie (L)" : `Call lie (${index + 1})`}
                 </button>
             )}
-            
-
             </div>
         ))}
         </div>
