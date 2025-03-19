@@ -26,6 +26,9 @@ function ClaimPopUp({ onClose, chosenCards, handlePlayTurn, previousClaim }: { o
         handlePlayTurn(visibleRanks[selectedCardIndex]);
         onClose();
       }
+      else if (event.key === "Escape") {
+        onClose();
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -67,7 +70,7 @@ function ClaimPopUp({ onClose, chosenCards, handlePlayTurn, previousClaim }: { o
           className="mt-4 rounded-full border border-solid border-blue-500 text-white px-4 py-2 text-center"
           onClick={onClose}
         >
-          Close
+          Close (Esc)
         </button>
       </div>
     </div>

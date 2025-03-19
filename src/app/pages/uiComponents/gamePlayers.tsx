@@ -1,7 +1,7 @@
 import Image from "next/image"
 
-export default function GamePlayers({players, currentPlayerIndex, gameStarted, askForDiscard, allPlayers, totalPlayed, handleCallLie}: 
-    {players: string[], currentPlayerIndex: number, gameStarted: boolean, askForDiscard: boolean, allPlayers: {name: string, count: number}[], totalPlayed: number, handleCallLie: (index: number) => void}) {
+export default function GamePlayers({players, currentPlayerIndex, gameStarted, askForDiscard, allPlayers, totalPlayed, handleCallLie, isTurn}: 
+    {players: string[], currentPlayerIndex: number, gameStarted: boolean, askForDiscard: boolean, allPlayers: {name: string, count: number}[], totalPlayed: number, handleCallLie: (index: number) => void, isTurn: boolean}) {
     const cardBackSrc = "/cards/nicubunu_Card_backs_grid_red.svg";
 
     return (
@@ -20,10 +20,17 @@ export default function GamePlayers({players, currentPlayerIndex, gameStarted, a
                 {gameStarted && (<span className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-black text-6xl font-extrabold">{allPlayers[index].count}</span>)}
                 </div>
             </div>
-            {/*call lie btton*/}
-            {totalPlayed > 0 && (
-                <button className="rounded-full border border-solid border-blue-500 text-white px-4 py-2 text-center" onClick={() => handleCallLie(index)}> Call Lie</button>
+
+            {/* call lie, only visible for current player during turn */}
+            {totalPlayed > 0 && (!isTurn || index === currentPlayerIndex) && (
+                <button 
+                    className="rounded-full border border-solid border-blue-500 text-white px-4 py-2 text-center" 
+                    onClick={() => handleCallLie(index)}
+                >
+                    Call Lie
+                </button>
             )}
+            
 
             </div>
         ))}

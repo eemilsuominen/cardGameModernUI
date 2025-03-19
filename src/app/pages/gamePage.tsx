@@ -108,6 +108,7 @@ export default function GamePage({usernames, setCreateLobby}: {usernames: string
     setCallLie(true)
     setLieCaller(players[caller])
     
+    //this is only for gameboard display
     if (lastClaim) {
       setCardPicker(players[caller])
     }
@@ -127,6 +128,11 @@ export default function GamePage({usernames, setCreateLobby}: {usernames: string
     setPlayedCardCount(0)
     setTotalPlayed(0)
     setClaimedRank("")
+
+    //check if lie was called during turn
+    if (isTurn) {
+      setIsTurn(false)
+    }
   }
 
   useEffect(() => {
@@ -170,6 +176,7 @@ export default function GamePage({usernames, setCreateLobby}: {usernames: string
       allPlayers={allPlayers}
       totalPlayed={totalPlayed}
       handleCallLie={handleCallLie}
+      isTurn={isTurn}
       />
 
       {/* current player's cards at the bottom, card choosing mechanism */}
