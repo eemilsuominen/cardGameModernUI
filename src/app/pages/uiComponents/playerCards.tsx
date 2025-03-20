@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react'
-import Image from "next/image"
 import Player from '@/app/gameComponents/player';
 
 export default function PlayerCards({isPopupVisible, setIsPopupVisible, setChosenCardIndexes, chosenCardIndexes, currentPlayer, gameStarted}: {  
@@ -74,10 +73,11 @@ export default function PlayerCards({isPopupVisible, setIsPopupVisible, setChose
               {currentPlayer.getCards().map((card, index) => (
                   <button
                   key={index}
-                  className={`relative inline-block ml-4 ${index === selectedCardIndex ? "shadow-lg shadow-blue-500/50" : ""} hover:shadow-lg hover:shadow-blue-500/50 ${chosenCardIndexes.includes(index) ? "border-4 border-yellow-500" : ""}`}
+                  className={`relative inline-block ml-4`}
                   onClick={() => handleCardClick(index)}
                   >
-                  <Image src={card.getImage()} alt={card.name} width={currentPlayer.getCards().length > 8 ? 100 : 125} height={100} style={{ margin: "5px" }} />
+                  <img src={card.getImage()} alt={card.name} width={currentPlayer.getCards().length > 8 ? 100 : 125} height={100} style={{ margin: "5px" }} 
+                  className={`rounded-2xl ${index === selectedCardIndex ? "shadow-lg shadow-blue-500/50" : ""} hover:shadow-lg ${chosenCardIndexes.includes(index) ? "border-4 border-yellow-500" : ""}`} />
                   </button>
               ))}
             </div>
