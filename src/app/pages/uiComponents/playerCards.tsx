@@ -77,7 +77,7 @@ export default function PlayerCards({isPopupVisible, setIsPopupVisible, setChose
                   onClick={() => handleCardClick(index)}
                   >
                   <img src={card.getImage()} alt={card.name} width={currentPlayer.getCards().length > 8 ? 100 : 125} height={100} style={{ margin: "5px" }} 
-                  className={`rounded-2xl ${index === selectedCardIndex ? "shadow-lg shadow-blue-500/50" : ""} hover:shadow-lg ${chosenCardIndexes.includes(index) ? "border-4 border-yellow-500" : ""}`} />
+                  className={`border-s-rounded ${index === selectedCardIndex ? "shadow-lg shadow-blue-500/50" : ""} hover:shadow-lg hover:shadow-blue-500/50 ${chosenCardIndexes.includes(index) ? "border-4 border-yellow-500" : ""}`} />
                   </button>
               ))}
             </div>
